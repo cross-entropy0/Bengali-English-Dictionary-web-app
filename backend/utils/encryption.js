@@ -1,9 +1,14 @@
 /**
  * XOR Decryption utility for encrypted BLOB fields
- * Key: ")@5D$k#*!"
+ * Key is loaded from environment variable
  */
 
-const ENCRYPTION_KEY = ")@5D$k#*!";
+// Read encryption key from environment variable
+const ENCRYPTION_KEY = process.env.XOR_ENCRYPTION_KEY;
+
+if (!ENCRYPTION_KEY) {
+    throw new Error('XOR_ENCRYPTION_KEY environment variable is required');
+}
 
 function xorDecrypt(buffer) {
     if (!buffer || buffer.length === 0) {
