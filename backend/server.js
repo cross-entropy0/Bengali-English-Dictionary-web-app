@@ -56,14 +56,16 @@ app.use((err, req, res, next) => {
     res.status(500).json({ error: 'Something went wrong!' });
 });
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`\n${'='.repeat(50)}`);
-    console.log(`🚀 Dictionary API Server Running`);
-    console.log(`📍 Port: ${PORT}`);
-    console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
-    console.log(`🔗 API: http://localhost:${PORT}/api`);
-    console.log(`${'='.repeat(50)}\n`);
-});
+// Start server (only in local development)
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`\n${'='.repeat(50)}`);
+        console.log(`🚀 Dictionary API Server Running`);
+        console.log(`📍 Port: ${PORT}`);
+        console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+        console.log(`🔗 API: http://localhost:${PORT}/api`);
+        console.log(`${'='.repeat(50)}\n`);
+    });
+}
 
 module.exports = app;
